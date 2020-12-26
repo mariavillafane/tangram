@@ -1,5 +1,4 @@
-import { useRef, useEffect } from 'react'
-import logo from './logo.svg';
+import { useEffect } from 'react'
 import './App.css';
 
 function range(count){
@@ -51,9 +50,6 @@ function main() {
 
   ctx.putImageData(newImage, 0, 0);
      
-
-
-
 
 }
 
