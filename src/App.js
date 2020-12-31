@@ -1,48 +1,10 @@
 import { useEffect } from 'react'
 import './App.css';
-import { rasteriseTriangle, triangle, vec } from './maths/geometry';
-import { range, to_image_data, to_image_matrix } from './maths/utils';
+import { triangle, vec, drawAverageTriangles } from './maths/geometry';
+import { to_image_data, to_image_matrix } from './maths/utils';
 
 
 
-function getAverageValue(values){
-  // reduce:
-  // let accumulator = startValue // #2nd argument 
-  // for (const value of values) {
-  //   accumulator = reducer(accumulator, value); # reducer #1st argument 
-  // }
-  // return accumulator;
-  const total = 
-    values.reduce(  
-      (x,y) => x+y,   //reducer #1st argument 
-      0.0             //startValue #2nd argument
-    )
-  return total/values.length
-}
-
-function getAverageColorRGBA(pixels){
-  const r = getAverageValue(pixels.map(x => x[0]))
-  const g = getAverageValue(pixels.map(x => x[1]))
-  const b = getAverageValue(pixels.map(x => x[2]))
-  const a = getAverageValue(pixels.map(x => x[3]))
-  return [r,g,b,a].map(x => Math.round(x))
-}
-
-
-
-function drawAverageTriangles(triangles, imageMatrix){
-  for (const triangle of triangles){
-    const tr = [...rasteriseTriangle(triangle)] //vec(0,0), vec(100,0), vec(0,200) = weird
-    //[...tr].forEach(pos => { imageMatrix[pos.x][pos.y] = [255, 50, 50, 255] });
-    const pixels = tr.map(pos => imageMatrix[pos.y][pos.x])
-    const avgColor = getAverageColorRGBA(pixels)
-    for (const pos of tr) {
-      console.log(pos);
-      //imageMatrix[pos.y][pos.x] = [250, 250, 50, 255]; 
-      imageMatrix[pos.y][pos.x] = avgColor
-    }
-  }
-}
 
 
 function main() {
