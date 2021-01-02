@@ -19,5 +19,15 @@ export function to_image_data(imageMatrix){
   return new Uint8ClampedArray(imageMatrix.flat().flatMap(x => [...x]));
 }
   
+export function slidingWindow (n, arr){ //n=3
+  if (arr.length >= n) {
+    const windows = arr.length-n+1
+    //triple = [i, i+1, i+2]
+    //range(windows).map(offset => arr[offset + 0] , offset + 1, offset + n-1] ) 
+    return range(windows).map(offset => arr.slice(offset + 0, offset + n) ) 
 
+  } else {
+    return []
+  }
+} 
 
