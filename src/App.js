@@ -35,7 +35,7 @@ function main() {
   ///const imageMatrix = imageRows.map(row => batch(4, row))
 
   const imageMatrix = to_image_matrix(512, 4, imageData);
-  console.log(imageMatrix);
+  //console.log(imageMatrix);
 
   //triangle part
   const p = vec(1,1); 
@@ -47,7 +47,7 @@ function main() {
   
 
   const imageDataAgain = to_image_data(imageMatrix);
-  console.log(imageDataAgain);
+  //console.log(imageDataAgain);
 
   const newImage = new ImageData(imageDataAgain, 512, 512);
   //const newImage = new ImageData(newImageData, 512, 512);
@@ -76,8 +76,11 @@ function Counter() {
 }
 
 
+
 function App() {
-  
+  const [verticesOfTriangles, setVarVerticesOfTr] = useState([]); //this initiates i=0  
+  console.log('verticesOfTriangles = ', verticesOfTriangles);
+
   useEffect(()=>{
     setTimeout(main);
   });
@@ -87,8 +90,11 @@ function App() {
     const x = Math.round(event.clientX - rect.left);
     const y = Math.round(event.clientY - rect.top);
     console.log({x,y});
+
+    setVarVerticesOfTr([...verticesOfTriangles, vec(x,y)])
   }
 
+  
   // React.createElement('div', ...)
   return (
     <div className="App">
