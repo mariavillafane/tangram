@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css';
 import { triangle, vec, drawAverageTriangles } from './maths/geometry';
 import { to_image_data, to_image_matrix } from './maths/utils';
@@ -55,18 +55,44 @@ function main() {
      
 }
 
+function Counter() {
+  console.log('rendering Counter');
+  const [i, setVarI] = useState([0]); //this initiates i=0
+  console.log({i});
+  
+  return (
+    <button onClick={() => {
+      console.log('button clicked');
+      i[0]=i[0]+1;
+      setVarI(i); //setVarI(i+1); as i is list of 1 elem
+      // const j = [i[0]+1];
+      // setVarI(j); 
+      console.log('I updated to ', i);
+    }}>{i}</button>
+  )
+}
 
 
 function App() {
+  
   useEffect(()=>{
     setTimeout(main);
   });
 
+  function onClickHandler(event) {
+    const rect = event.target.getBoundingClientRect();
+    const x = Math.round(event.clientX - rect.left);
+    const y = Math.round(event.clientY - rect.top);
+    console.log({x,y});
+  }
+
+  // React.createElement('div', ...)
   return (
     <div className="App">
       <h1> Hello geometry </h1>
+      <Counter />
       <img className="inputImage" src="/mv_2020_10_512.png" />
-      <canvas className="inputImageCanvas" width={500} height={500} />
+      <canvas className="inputImageCanvas" width={500} height={500} onClick={onClickHandler} />
       <svg width={500} height={500}>
         <circle fill="red" r={50} cx={200} cy={200} />
       </svg>
