@@ -104,7 +104,7 @@ export function drawAverageTriangles(triangles, imageMatrix){
     const pixels = tr.map(pos => imageMatrix[pos.y][pos.x])
     const avgColor = getAverageColorRGBA(pixels)
     for (const pos of tr) {
-      console.log(pos);
+      //console.log(pos);
       //imageMatrix[pos.y][pos.x] = [250, 250, 50, 255]; 
       imageMatrix[pos.y][pos.x] = avgColor
     }

@@ -55,20 +55,23 @@ function main() {
      
 }
 
+//counter = function that changes state over time
 function Counter() {
   console.log('rendering Counter');
   const [i, setVarI] = useState([0]); //this initiates i=0
   console.log({i});
   
+  const handler = () => {
+    console.log('button clicked');
+    //i[0]=i[0]+1;
+    //setVarI(i); //setVarI(i+1); as i is list of 1 elem
+    const j = [i[0]+1];
+    setVarI(j); //the counter function reruns only if setVarI is called with value diff (j) than previous value(i)
+    console.log('I updated to ', i);
+  }
+
   return (
-    <button onClick={() => {
-      console.log('button clicked');
-      i[0]=i[0]+1;
-      setVarI(i); //setVarI(i+1); as i is list of 1 elem
-      // const j = [i[0]+1];
-      // setVarI(j); 
-      console.log('I updated to ', i);
-    }}>{i}</button>
+    <button onClick={handler}>{i}</button>
   )
 }
 
